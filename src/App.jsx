@@ -13,7 +13,25 @@ function App() {
 
   const currentCard = spaceCards[currentIndex];
 
-  return ();
+  return (
+    <div className="app">
+      <header className="app-header">
+        <h1>
+          Midnight Zenith
+          </h1>
+
+        <p className="description">
+          Welcome to the highest point of cosmic trivia. Test your knowledge of the stellar void.
+        </p>
+
+        <h3>
+          Total Cards in Deck: {spaceCards.length}
+        </h3>
+      </header>
+
+      
+    </div>
+  );
 }
 
 export default App;
