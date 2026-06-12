@@ -29,6 +29,17 @@ function App() {
         </h3>
       </header>
 
+      <main className="card-area">
+        <Card
+          question={currentCard.question}
+          answer={currentCard.answer}
+          category={currentCard.category}
+        />
+
+        <button className="next-button" onClick={handleNextCard}>
+          ⭢
+        </button>
+      </main>
       
     </div>
   );
