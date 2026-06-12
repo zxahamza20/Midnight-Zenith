@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Card.css';
 
 const Card = ({ question, answer, category }) => {
   const [isFlipped, setIsFlipped] = useState(false);

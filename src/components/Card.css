@@ -1,0 +1,84 @@
+.card {
+  width: 460px;
+  height: 280px;
+  background: rgba(25, 22, 43, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.card.Solar\ System {
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 0 10px 40px rgba(245, 158, 11, 0.08);
+}
+
+.card.Stars\ \&\ Nebulae {
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  box-shadow: 0 10px 40px rgba(34, 211, 238, 0.08);
+}
+
+.card.Cosmology {
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  box-shadow: 0 10px 40px rgba(167, 139, 250, 0.08);
+}
+
+.card.Black\ Holes {
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  box-shadow: 0 10px 40px rgba(244, 63, 94, 0.1);
+}
+
+.card-content {
+  width: 100%;
+}
+
+.category-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #94A3B8;
+  display: inline-block;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.question-text {
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #F8FAFC;
+  margin: 0;
+}
+
+.answer-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #F59E0B; 
+  animation: fadeInAnswer 0.35s ease-out;
+}
+
+@keyframes fadeInAnswer {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
