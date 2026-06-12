@@ -48,31 +48,35 @@
 }
 
 .category-tag {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: #94A3B8;
+  letter-spacing: 0.18em;
+  color: #C084FC;
   display: inline-block;
   margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 4px 12px;
+  background: rgba(192, 132, 252, 0.12);
+  padding: 6px 16px;
   border-radius: 20px;
+  border: 1px solid rgba(192, 132, 252, 0.2);
+  text-shadow: 0 0 12px rgba(192, 132, 252, 0.4);
 }
 
 .question-text {
   font-size: 1.35rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #F8FAFC;
+  color: #7DD3FC;
   margin: 0;
+  text-shadow: 0 0 15px rgba(125, 211, 252, 0.3);
 }
 
 .answer-text {
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.4;
-  color: #F59E0B; 
+  color: #D8B4FE;
+  text-shadow: 0 0 15px rgba(216, 180, 254, 0.3);
   animation: fadeInAnswer 0.35s ease-out;
 }
 
