@@ -21,7 +21,6 @@ body {
 }
 
 .app-header {
-  .app-header {
   text-align: center;
   margin-bottom: 40px;
   
@@ -31,7 +30,6 @@ body {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-}
 }
 
 .app-header h1 {
