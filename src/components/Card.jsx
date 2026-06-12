@@ -7,7 +7,6 @@ const Card = ({ question, answer, category }) => {
   const handleCardClick = () => {
     setIsFlipped(!isFlipped);
   };
-  
 
   return (
     <div className="card" data-category={category} onClick={handleCardClick}>
