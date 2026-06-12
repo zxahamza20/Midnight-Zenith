@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url('./assets/space.jpg') no-repeat center center fixed,
+              radial-gradient(circle at 50% 50%, #141226 0%, #09070F 100%);
+
+  background-size: cover;
+  color: #E2E8F0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.app-header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px 0;
+  background: linear-gradient(135deg, #E2E8F0 0%, #A78BFA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 20px rgba(167, 139, 250, 0.15);
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #94A3B8;
+  max-width: 500px;
+  margin: 0 auto 16px auto;
+  line-height: 1.6;
+}
+
+.app-header h3 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #C084FC;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.card-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.next-btn {
+  background: linear-gradient(135deg, #7C3AED 0%, #C084FC 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+  transition: all 0.3s ease;
+}
+
+.next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(192, 132, 252, 0.5);
+}
+
+.next-btn:active {
+  transform: translateY(0);
+}
