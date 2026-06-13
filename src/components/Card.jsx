@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
 
-const Card = ({ question, answer, category, image }) => {
+const Card = ({ question, answer, category, image, forceFlipReset }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     setIsFlipped(false);
-  }, [question]);
+  }, [question, forceFlipReset]);
 
   const handleCardClick = () => {
     setIsFlipped(!isFlipped);
@@ -22,7 +22,7 @@ const Card = ({ question, answer, category, image }) => {
         <div className="card-front">
           <div className="card-content">
             <span className="category-tag">{category}</span>
-            {image && <img src={image} alt="Cosmic Visual clue" className="card-img" />}
+            {image && <img src={image} alt="Cosmic Clue" className="card-img" />}
             <p className="question-text">{question}</p>
           </div>
         </div>
