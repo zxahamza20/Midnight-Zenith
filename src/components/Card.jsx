@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
 
-const Card = ({id, question, answer, category, image, forceFlipReset, difficulty, discoveredCardIds }) => {
+const Card = ({ id, question, answer, category, image, forceFlipReset, difficulty, discoveredCardIds, isTransitioningFilter }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
@@ -12,21 +12,18 @@ const Card = ({id, question, answer, category, image, forceFlipReset, difficulty
     setIsFlipped(!isFlipped);
   };
 
-  const isDiscovered = discoveredCardIds ? discoveredCardIds.has(id) : false;
-
   return (
     <div 
-      className={`card ${isFlipped ? 'is-flipped' : ''}`} 
+      className={`card ${isFlipped && !isTransitioningFilter ? 'is-flipped' : ''} ${isTransitioningFilter ? 'suppress-flip' : ''}`} 
       data-category={category} 
       onClick={handleCardClick}
     >
       <div className="card-inner">
         <div className="card-front">
           <div className="card-content">
-
             <div className="card-header-badges">
               {discoveredCardIds && discoveredCardIds.has(id) ? (
-                <span className="discovered-badge">Discovered</span>
+                <span className="discovered-badge">discovered</span>
               ) : (
                 <span className="new-badge">New!</span>
               )}
@@ -40,7 +37,7 @@ const Card = ({id, question, answer, category, image, forceFlipReset, difficulty
               )}
             </div>
 
-            {image && (<img src={image} alt="Cosmic Clue" className="card-img" />)}
+            {image && <img src={image} alt="Cosmic Clue" className="card-img" />}
             <p className="question-text">{question}</p>
           </div>
         </div>

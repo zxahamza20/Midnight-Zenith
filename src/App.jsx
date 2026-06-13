@@ -8,10 +8,15 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [forceFlipReset, setForceFlipReset] = useState(0);
   const [discoveredCardIds, setDiscoveredCardIds] = useState(new Set());
+  const [isTransitioningFilter, setIsTransitioningFilter] = useState(false);
 
   const filteredCards = activeCategory === 'All' 
     ? spaceCards 
     : spaceCards.filter(card => card.category === activeCategory);
+
+  const currentCard = filteredCards[currentIndex];
+  
+  const categoryList = ['All', ...new Set(spaceCards.map(card => card.category))];
 
   const handleNextCard = () => {
     setForceFlipReset(prev => prev + 1);
@@ -35,14 +40,16 @@ function App() {
   };
 
   const handleCategoryChange = (category) => {
+    setIsTransitioningFilter(true);
     setForceFlipReset(prev => prev + 1);
     setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
     setCurrentIndex(0);
     setActiveCategory(category);
+    
+    setTimeout(() => {
+      setIsTransitioningFilter(false);
+    }, 50);
   };
-
-  const currentCard = filteredCards[currentIndex];
-  const categoryList = ['All', 'Solar System', 'Stars & Nebulae', 'Cosmology', 'Black Holes'];
 
   return (
     <div className="app">
@@ -51,10 +58,12 @@ function App() {
         <p className="description">
           Welcome to the highest point of cosmic trivia. Test your knowledge of the stellar void.
         </p>
-        <h3>Total Cards in Deck: {spaceCards.length}</h3>
-        <h3>{activeCategory === 'All' ? 'Total' : activeCategory} Deck: {filteredCards.length} Cards</h3>
+        <h3>total cards in deck: {spaceCards.length}</h3>
+        <h3>
+          {activeCategory.toLowerCase() === 'all' ? 'total' : activeCategory.toLowerCase()} deck: {filteredCards.length} cards
+        </h3>
         <p className="discovered-tracker">
-          Cosmic Exploration: {discoveredCardIds.size} cards discovered
+          cosmic exploration: {discoveredCardIds.size} cards discovered
         </p>
       </header>
 
@@ -82,6 +91,7 @@ function App() {
             forceFlipReset={forceFlipReset} 
             difficulty={currentCard.difficulty}
             discoveredCardIds={discoveredCardIds}
+            isTransitioningFilter={isTransitioningFilter}
           />
         ) : (
           <div style={{ color: '#94A3B8', padding: '40px' }}>No cards available.</div>

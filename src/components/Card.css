@@ -212,6 +212,17 @@
   text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
 }
 
+.card.suppress-flip .card-inner {
+  transform: rotateY(0deg) !important;
+  transition: none !important;
+}
+
+.card.suppress-flip .card-back {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: none !important;
+}
+
 @media (max-width: 500px) {
   .card {
     min-height: 400px;    
