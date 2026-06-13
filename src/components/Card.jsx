@@ -4,7 +4,6 @@ import './Card.css';
 const Card = ({ question, answer, category, image }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
-  // Automatically flips the card back to the front face when a new question loads
   useEffect(() => {
     setIsFlipped(false);
   }, [question]);
@@ -20,7 +19,6 @@ const Card = ({ question, answer, category, image }) => {
       onClick={handleCardClick}
     >
       <div className="card-inner">
-        {/* Front Surface Face (Shows Category, Image, and Question) */}
         <div className="card-front">
           <div className="card-content">
             <span className="category-tag">{category}</span>
@@ -29,7 +27,6 @@ const Card = ({ question, answer, category, image }) => {
           </div>
         </div>
 
-        {/* Back Surface Face (Shows Only Answer text) */}
         <div className="card-back">
           <div className="card-content">
             <p className="answer-text">{answer}</p>

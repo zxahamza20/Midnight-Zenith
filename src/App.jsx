@@ -34,7 +34,7 @@ function App() {
           question={currentCard.question}
           answer={currentCard.answer}
           category={currentCard.category}
-          image={currentCard.image} /* Attaches your local assets paths */
+          image={currentCard.image}
         />
 
         <button className="next-button" onClick={handleNextCard}>
