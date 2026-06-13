@@ -1,5 +1,4 @@
-// src/components/spaceCards.jsx
-const spaceCards = [
+ const spaceCards = [
   // --- Category: Solar System (7 Cards) ---
   { 
     id: 1, 

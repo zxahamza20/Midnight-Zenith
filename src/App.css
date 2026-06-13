@@ -160,6 +160,15 @@ body {
   box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
 }
 
+.discovered-tracker {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #94A3B8;
+  margin: 8px 0 0 0;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
 @media (max-width: 500px) {
   .app {
     padding-top: 15px;
