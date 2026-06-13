@@ -5,7 +5,7 @@ body {
               radial-gradient(circle at 50% 50%, #141226 0%, #09070F 100%);
 
   background-size: cover;
-  color: #E2E8F0;
+  color: #000000;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
@@ -53,7 +53,7 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #cd9aff;
+  color: #d7b0ff;
   margin: 0;
   opacity: 0.9;
 }
@@ -70,6 +70,9 @@ body {
   background: linear-gradient(135deg, #7C3AED 0%, #C084FC 100%);
   color: #FFFFFF;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 16px 36px;
   font-size: 1.8rem;
   font-weight: 600;
@@ -89,4 +92,47 @@ body {
   transform: translateY(3px) scale(0.96);
   box-shadow: 0 2px 10px rgba(124, 58, 237, 0.4);
   background: linear-gradient(135deg, #C084FC 0%, #7C3AED 100%);
+}
+
+/* --- ADD TO THE VERY BOTTOM OF App.css --- */
+@media (max-width: 500px) {
+  .app {
+    padding-top: 15px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .app-header {
+    padding: 0 16px;
+    margin-bottom: 24px;
+  }
+
+  .app-header h1 {
+    font-size: 2.2rem;       /* Prevents title text from creating clumsy line breaks */
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    margin: 0 auto 12px auto;
+  }
+
+  .app-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .card-area {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+    gap: 20px;
+  }
+
+  .next-button {
+    width: 55px;             /* Symmetrical tap surface target */
+    height: 55px;
+    padding: 0;              /* Eliminates uneven padding that pushed the arrow right */
+    font-size: 1.5rem;
+    border-radius: 50%;      /* Changes button into a neat circle on mobile screens */
+  }
 }
