@@ -35,6 +35,8 @@ const spaceCards = [
   { id: 26, question: "What type of radiation is theoretically emitted by black holes due to quantum effects near the horizon?", answer: "Hawking Radiation", category: "Black Holes", image: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600" },
   { id: 27, question: "What are black holes that form from the collapsed remnants of massive stars called?", answer: "Stellar Black Holes", category: "Black Holes", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600" },
   { id: 28, question: "What do astronomers look for to detect a dormant black hole?", answer: "Gravitational effects on nearby stars", category: "Black Holes", image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600" }
+
+  
 ];
 
 export default spaceCards;
