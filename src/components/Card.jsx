@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
 
-const Card = ({ question, answer, category, image, forceFlipReset }) => {
+const Card = ({ question, answer, category, image, forceFlipReset, difficulty }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,16 @@ const Card = ({ question, answer, category, image, forceFlipReset }) => {
       <div className="card-inner">
         <div className="card-front">
           <div className="card-content">
-            <span className="category-tag">{category}</span>
+            
+            <div className="card-header-badges">
+              <span className="category-tag">{category}</span>
+              {difficulty && (
+                <span className={`difficulty-tag ${difficulty.toLowerCase()}`}>
+                  {difficulty}
+                </span>
+              )}
+            </div>
+
             {image && <img src={image} alt="Cosmic Clue" className="card-img" />}
             <p className="question-text">{question}</p>
           </div>
