@@ -94,7 +94,6 @@ body {
   background: linear-gradient(135deg, #C084FC 0%, #7C3AED 100%);
 }
 
-/* --- ADD TO THE VERY BOTTOM OF App.css --- */
 @media (max-width: 500px) {
   .app {
     padding-top: 15px;
@@ -108,7 +107,7 @@ body {
   }
 
   .app-header h1 {
-    font-size: 2.2rem;       /* Prevents title text from creating clumsy line breaks */
+    font-size: 2.2rem;    
     margin-bottom: 10px;
   }
 
@@ -129,10 +128,10 @@ body {
   }
 
   .next-button {
-    width: 55px;             /* Symmetrical tap surface target */
+    width: 55px;            
     height: 55px;
-    padding: 0;              /* Eliminates uneven padding that pushed the arrow right */
+    padding: 0;            
     font-size: 1.5rem;
-    border-radius: 50%;      /* Changes button into a neat circle on mobile screens */
+    border-radius: 50%;     
   }
 }

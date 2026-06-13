@@ -135,7 +135,7 @@
 
 @media (max-width: 500px) {
   .card {
-    min-height: 400px;     /* Slightly shorter minimum container height */
+    min-height: 400px;    
   }
   
   .card-inner,

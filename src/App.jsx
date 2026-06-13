@@ -34,7 +34,7 @@ function App() {
           answer={currentCard.answer}
           category={currentCard.category}
           image={currentCard.image}
-          forceFlipReset={forceFlipReset} /* Passes the synchronization trigger down */
+          forceFlipReset={forceFlipReset} 
         />
 
         <button className="next-button" onClick={handleNextCard}>
