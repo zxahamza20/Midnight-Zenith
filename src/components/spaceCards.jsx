@@ -6,7 +6,7 @@
     answer: "Venus", 
     category: "Solar System", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1614313913007-2b4ae8ce32d6?w=600" 
+    image: "images/venus.jpg" 
   },
   { 
     id: 2, 
@@ -14,7 +14,7 @@
     answer: "Saturn", 
     category: "Solar System", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=600" 
+    image: "images/saturn.jpg" 
   },
   { 
     id: 3, 
@@ -22,7 +22,7 @@
     answer: "Jupiter", 
     category: "Solar System", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=600" 
+    image: "images/jupiter.jpg" 
   },
   { 
     id: 4, 
@@ -30,7 +30,7 @@
     answer: "Mars", 
     category: "Solar System", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1614722894747-a83421e2b9c9?w=600" 
+    image: "images/mars.jpg" 
   },
   { 
     id: 5, 
@@ -38,7 +38,7 @@
     answer: "Pluto", 
     category: "Solar System", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1614314107204-d72096f2a58f?w=600" 
+    image: "images/pluto.jpg" 
   },
   { 
     id: 6, 
@@ -46,7 +46,7 @@
     answer: "Titan", 
     category: "Solar System", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=600" 
+    image: "images/titan.jpg" 
   },
   { 
     id: 7, 
@@ -54,7 +54,7 @@
     answer: "Mars and Jupiter", 
     category: "Solar System", 
     difficulty: "Hard",
-    image: "https://images.unsplash.com/photo-1614314107204-d72096f2a58f?w=600" 
+    image: "images/asteroid_belt.jpg" 
   },
 
   // --- Category: Stars & Nebulae (7 Cards) ---
@@ -64,7 +64,7 @@
     answer: "The Sun", 
     category: "Stars & Nebulae", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=600" 
+    image: "images/sun.jpg" 
   },
   { 
     id: 9, 
@@ -72,7 +72,7 @@
     answer: "A Nebula", 
     category: "Stars & Nebulae", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600" 
+    image: "images/nebula.jpg" 
   },
   { 
     id: 10, 
@@ -80,7 +80,7 @@
     answer: "A Supernova", 
     category: "Stars & Nebulae", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" 
+    image: "images/supernova.jpg" 
   },
   { 
     id: 11, 
@@ -88,7 +88,7 @@
     answer: "Blue", 
     category: "Stars & Nebulae", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600" 
+    image: "images/giant-stars.jpg" 
   },
   { 
     id: 12, 
@@ -96,7 +96,7 @@
     answer: "A Neutron Star", 
     category: "Stars & Nebulae", 
     difficulty: "Hard",
-    image: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600" 
+    image: "images/neutron-star.jpg" 
   },
   { 
     id: 13, 
@@ -104,7 +104,7 @@
     answer: "Alpha Centauri", 
     category: "Stars & Nebulae", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?w=600" 
+    image: "images/alpha-centauri.jpg" 
   },
   { 
     id: 14, 
@@ -112,7 +112,7 @@
     answer: "Nuclear Fusion", 
     category: "Stars & Nebulae", 
     difficulty: "Hard",
-    image: "https://images.unsplash.com/photo-1464802686167-b939a6910659?w=600" 
+    image: "nuclear-fusion.jpg" 
   },
 
   // --- Category: Cosmology (7 Cards) ---
@@ -122,7 +122,7 @@
     answer: "The Milky Way", 
     category: "Cosmology", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600" 
+    image: "images/milky-way.jpg" 
   },
   { 
     id: 16, 
@@ -130,15 +130,15 @@
     answer: "The Big Bang Theory", 
     category: "Cosmology", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600" 
+    image: "images/big-bang.jpg" 
   },
   { 
     id: 17, 
-    question: "Is the universe currently expanding, static, or shrinking over historical epochs?", 
+    question: "Is the universe expanding, static, or shrinking over historical epochs?", 
     answer: "Expanding", 
     category: "Cosmology", 
     difficulty: "Easy",
-    image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=600" 
+    image: "images/universe-expansion.jpg" 
   },
   { 
     id: 18, 
@@ -146,7 +146,7 @@
     answer: "Dark Matter", 
     category: "Cosmology", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" 
+    image: "images/dark-matter.jpg" 
   },
   { 
     id: 19, 
@@ -154,7 +154,7 @@
     answer: "Dark Energy", 
     category: "Cosmology", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600" 
+    image: "images/dark-energy.jpg" 
   },
   { 
     id: 20, 
@@ -162,7 +162,7 @@
     answer: "Cosmic Microwave Background (CMB)", 
     category: "Cosmology", 
     difficulty: "Hard",
-    image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600" 
+    image: "images/cmb.jpg" 
   },
   { 
     id: 21, 
@@ -170,7 +170,7 @@
     answer: "Andromeda", 
     category: "Cosmology", 
     difficulty: "Hard",
-    image: "https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600" 
+    image: "images/andromeda.jpg" 
   },
 
   // --- Category: Black Holes (7 Cards) ---
@@ -180,7 +180,7 @@
     answer: "The Event Horizon", 
     category: "Black Holes", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1504333638930-c8787321eff0?w=600" 
+    image: "images/event-horizon.jpg" 
   },
   { 
     id: 23, 
@@ -188,7 +188,7 @@
     answer: "A Singularity", 
     category: "Black Holes", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1504333638930-c8787321eff0?w=600" 
+    image: "images/singularity.jpg" 
   },
   { 
     id: 24, 
@@ -196,7 +196,7 @@
     answer: "Spaghettification", 
     category: "Black Holes", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=600" 
+    image: "images/spaghettification.jpg" 
   },
   { 
     id: 25, 
@@ -204,7 +204,7 @@
     answer: "Sagittarius A*", 
     category: "Black Holes", 
     difficulty: "Hard",
-    image: "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=600" 
+    image: "images/sagittarius-a-star.jpg" 
   },
   { 
     id: 26, 
@@ -212,7 +212,7 @@
     answer: "Hawking Radiation", 
     category: "Black Holes", 
     difficulty: "Hard",
-    image: "https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=600" 
+    image: "images/hawking-radiation.jpg" 
   },
   { 
     id: 27, 
@@ -220,7 +220,7 @@
     answer: "Stellar Black Holes", 
     category: "Black Holes", 
     difficulty: "Medium",
-    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600" 
+    image: "images/stellar-black-holes.jpg" 
   },
   { 
     id: 28, 
@@ -228,7 +228,7 @@
     answer: "An Accretion Disk", 
     category: "Black Holes", 
     difficulty: "Hard",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" 
+    image: "images/accretion-disk.jpg" 
   }
 ];
 
