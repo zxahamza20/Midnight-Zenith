@@ -54,7 +54,7 @@
     answer: "Mars and Jupiter", 
     category: "Solar System", 
     difficulty: "Hard",
-    image: "images/asteroid_belt.jpg" 
+    image: "images/asteroid-belt.jpg" 
   },
 
   // --- Category: Stars & Nebulae (7 Cards) ---
@@ -112,7 +112,7 @@
     answer: "Nuclear Fusion", 
     category: "Stars & Nebulae", 
     difficulty: "Hard",
-    image: "nuclear-fusion.jpg" 
+    image: "images/nuclear-fusion.jpg" 
   },
 
   // --- Category: Cosmology (7 Cards) ---

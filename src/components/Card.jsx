@@ -40,11 +40,7 @@ const Card = ({id, question, answer, category, image, forceFlipReset, difficulty
               )}
             </div>
 
-            {image && (
-              <div className="card-img-container">
-                <img src={image} alt="Cosmic Clue" className="card-img" />
-              </div>
-            )}
+            {image && (<img src={image} alt="Cosmic Clue" className="card-img" />)}
             <p className="question-text">{question}</p>
           </div>
         </div>
