@@ -94,6 +94,72 @@ body {
   background: linear-gradient(135deg, #C084FC 0%, #7C3AED 100%);
 }
 
+.category-filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 10px auto 30px auto;
+  max-width: 650px;
+  padding: 0 16px;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.04);
+  color: #deecff;
+  border: 1px solid rgba(255, 255, 255, 0.41);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(4px);
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F8FAFC;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-btn.active[data-cat="All"] {
+  background: rgba(167, 139, 250, 0.15);
+  color: #C084FC;
+  border-color: rgba(167, 139, 250, 0.5);
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.2);
+}
+
+.filter-btn.active[data-cat="Solar System"] {
+  background: rgba(245, 158, 11, 0.15);
+  color: #F59E0B;
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+}
+
+.filter-btn.active[data-cat="Stars & Nebulae"] {
+  background: rgba(34, 211, 238, 0.15);
+  color: #22D3EE;
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+}
+
+.filter-btn.active[data-cat="Cosmology"] {
+  background: rgba(167, 139, 250, 0.15);
+  color: #A78BFA;
+  border-color: rgba(167, 139, 250, 0.5);
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.2);
+}
+
+.filter-btn.active[data-cat="Black Holes"] {
+  background: rgba(244, 63, 94, 0.15);
+  color: #F43F5E;
+  border-color: rgba(244, 63, 94, 0.5);
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+}
+
 @media (max-width: 500px) {
   .app {
     padding-top: 15px;
@@ -133,5 +199,14 @@ body {
     padding: 0;            
     font-size: 1.5rem;
     border-radius: 50%;     
+  }
+
+  .category-filters {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .filter-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 }
