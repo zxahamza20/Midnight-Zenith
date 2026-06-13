@@ -20,36 +20,40 @@ body {
   box-sizing: border-box;
 }
 
+.app {
+  padding-top: 30px;
+}
+
 .app-header {
   text-align: center;
   margin-bottom: 40px;
 }
 
 .app-header h1 {
-  font-size: 2.8rem;
+  font-size: 3.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin: 0 0 12px 0;
-  background: linear-gradient(135deg, #E2E8F0 0%, #A78BFA 100%);
+  margin: 0 0 16px 0;
+  background: linear-gradient(135deg, #d1ddec 0%, #825eee 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 4px 20px rgba(167, 139, 250, 0.15);
 }
 
 .description {
-  font-size: 1.1rem;
-  color: #94A3B8;
-  max-width: 500px;
+  font-size: 1.6rem;
+  color: #d3d3d3;
+  max-width: 600px;
   margin: 0 auto 16px auto;
   line-height: 1.6;
 }
 
 .app-header h3 {
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 1.4rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #C084FC;
+  color: #cd9aff;
   margin: 0;
   opacity: 0.9;
 }
@@ -59,6 +63,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 32px;
+  padding-bottom: 60px;
 }
 
 .next-button {
