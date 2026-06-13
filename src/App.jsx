@@ -7,7 +7,7 @@ function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [forceFlipReset, setForceFlipReset] = useState(0);
-  const [discoveredCardIds, setDiscoveredCardIds] = useState(new Set([spaceCards[0].id]));
+  const [discoveredCardIds, setDiscoveredCardIds] = useState(new Set());
 
   const filteredCards = activeCategory === 'All' 
     ? spaceCards 
@@ -26,27 +26,19 @@ function App() {
           ? spaceCards 
           : spaceCards.filter(card => card.category === activeCategory);
 
+        setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
+
         const randomIndex = Math.floor(Math.random() * currentPoolSize);
         setCurrentIndex(randomIndex);
-
-        const nextCardId = currentFiltered[randomIndex].id;
-        setDiscoveredCardIds(prev => new Set([...prev, nextCardId]));
       }
     }, 300);
   };
 
   const handleCategoryChange = (category) => {
     setForceFlipReset(prev => prev + 1);
+    setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
     setCurrentIndex(0);
     setActiveCategory(category);
-
-    const nextFiltered = category === 'All'
-      ? spaceCards
-      : spaceCards.filter(card => card.category === category);
-
-    if (nextFiltered.length > 0) {
-      setDiscoveredCardIds(prev => new Set([...prev, nextFiltered[0].id]));
-    }
   };
 
   const currentCard = filteredCards[currentIndex];

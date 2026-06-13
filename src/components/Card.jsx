@@ -25,14 +25,14 @@ const Card = ({id, question, answer, category, image, forceFlipReset, difficulty
           <div className="card-content">
 
             <div className="card-header-badges">
-              {isDiscovered && (
-                <span className="discovered-badge">
-                  Discovered
-                </span>
+              {discoveredCardIds && discoveredCardIds.has(id) ? (
+                <span className="discovered-badge">Discovered</span>
+              ) : (
+                <span className="new-badge">New!</span>
               )}
 
               <span className="category-tag">{category}</span>
-              
+
               {difficulty && (
                 <span className={`difficulty-tag ${difficulty.toLowerCase()}`}>
                   {difficulty}
