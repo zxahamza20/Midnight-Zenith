@@ -59,7 +59,7 @@ GIF created with ...
 ### Production Screenshots
 
 **Filter: All Category: Solar System**
-<img src='https://i.imgur.com/gF6diaY.jpeg' title='Filter: All Category: Solar System' width='100%' alt='Filter: All Category: Solar System' />
+<img src='./src/assets/demo-walkthrough.gif' title='Filter: All Category: Solar System' width='100%' alt='Filter: All Category: Solar System' />
 
 **Filter: All Category: Solar System (flipped card example)**
 <img src='https://i.imgur.com/O5rD1rS.jpeg' title='Filter: All Category: Solar System (flipped card example)' width='100%' alt='Filter: All Category: Solar System (flipped card example)' />
