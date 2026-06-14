@@ -1,5 +1,5 @@
  const spaceCards = [
-  // --- Category: Solar System (7 Cards) ---
+  // --- Category: Solar System ---
   { 
     id: 1, 
     question: "What is the hottest planet in our solar system?", 
@@ -57,7 +57,7 @@
     image: "images/asteroid-belt.jpg" 
   },
 
-  // --- Category: Stars & Nebulae (7 Cards) ---
+  // --- Category: Stars & Nebulae ---
   { 
     id: 8, 
     question: "What is the closest star to Earth?", 
@@ -115,7 +115,7 @@
     image: "images/nuclear-fusion.jpg" 
   },
 
-  // --- Category: Cosmology (7 Cards) ---
+  // --- Category: Cosmology ---
   { 
     id: 15, 
     question: "What is the name of the galaxy that contains our Solar System?", 
@@ -173,7 +173,7 @@
     image: "images/andromeda.jpg" 
   },
 
-  // --- Category: Black Holes (7 Cards) ---
+  // --- Category: Black Holes ---
   { 
     id: 22, 
     question: "What is the boundary surrounding a black hole from which absolutely nothing can escape?", 
