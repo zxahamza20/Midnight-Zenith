@@ -55,6 +55,47 @@ GIF created with ...
 [ScreenToGif](https://www.screentogif.com/) for Windows
 [peek](https://github.com/phw/peek) for Linux. -->
 
+### Production Screenshots
+
+**Filter: All Category: Solar System**
+<img src='https://i.imgur.com/gF6diaY.jpeg' title='Filter: All Category: Solar System' width='100%' alt='Filter: All Category: Solar System' />
+
+**Filter: All Category: Solar System (flipped card example)**
+<img src='https://i.imgur.com/O5rD1rS.jpeg' title='Filter: All Category: Solar System (flipped card example)' width='100%' alt='Filter: All Category: Solar System (flipped card example)' />
+
+**Filter: All Category: Stars and Nebulae**
+<img src='https://i.imgur.com/aCRn4oj.jpeg' title='Filter: All Category: Stars and Nebulae' width='100%' alt='Filter: All Category: Stars and Nebulae' />
+
+**Filter: All Category: Cosmology**
+<img src='https://i.imgur.com/cyLwetF.jpeg' title='Filter: All Category: Cosmology' width='100%' alt='Filter: All Category: Cosmology' />
+
+**Filter: All Category: Black Holes**
+<img src='https://i.imgur.com/9OY2sie.jpeg' title='Filter: All Category: Black Holes' width='100%' alt='Filter: All Category: Black Holes' />
+
+**Filter: Solar System**
+<img src='https://i.imgur.com/rnEHfnn.jpeg' title='Filter: Solar System' width='100%' alt='Filter: Solar System' />
+
+**Filter: Solar System (flipped card exmaple)**
+<img src='https://i.imgur.com/Wxd4eXu.jpeg' title='Filter: Solar System (flipped card exmaple)' width='100%' alt='Filter: Solar System (flipped card exmaple)' />
+
+**Filter: Stars and Nebulae**
+<img src='https://i.imgur.com/5Q8emSm.jpeg' title='Filter: Stars and Nebulae' width='100%' alt='Filter: Stars and Nebulae' />
+
+**Filter: Stars and Nebulae (flipped card exmaple)**
+<img src='https://i.imgur.com/2PcVmIC.jpeg' title='Filter: Stars and Nebulae (flipped card exmaple)' width='100%' alt='Filter: Stars and Nebulae (flipped card exmaple)' />
+
+**Filter: Cosmology**
+<img src='https://i.imgur.com/mkse6CH.jpeg' title='Filter: Cosmology' width='100%' alt='Filter: Cosmology' />
+
+**Filter: Cosmology (flipped card exmaple)**
+<img src='https://i.imgur.com/8qUiSAG.jpeg' title='Filter: Cosmology (flipped card exmaple)' width='100%' alt='Filter: Cosmology (flipped card exmaple)' />
+
+**Filter: Black Holes**
+<img src='https://i.imgur.com/9wTFBPy.jpeg' title='Filter: Black Holes' width='100%' alt='Filter: Black Holes' />
+
+**Filter: Black Holes (flipped card exmaple)**
+<img src='https://i.imgur.com/WtwLye1.jpeg' title='Filter: Black Holes (flipped card exmaple)' width='100%' alt='Filter: Black Holes (flipped card exmaple)' />
+
 ## Notes
 
 1. Vite Public Directory Root Pathing: Configuring local images initially caused routing mismatches when assuming relative structural path chains (Midnight-Zenith/public/...). This was solved by understanding that Vite automatically mounts and maps the root / URL string endpoint straight onto the public/ directory, requiring absolute paths starting cleanly from /images/.
