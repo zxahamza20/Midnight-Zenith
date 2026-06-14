@@ -35,12 +35,12 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [x] **Discovered Progress Tracker:** New cards or cards the appear the first time have a green New! tag oabove the image and a purple discovered tag when it appears a second time and onwards
+* [x] **Discovered Progress Tracker:** New cards or cards that appear the first time have a green New! tag oabove the image and a purple discovered tag when it appears a second time and onwards
   - [x] There is a total discovered count below the total count which shows how many cards have been discovered
 * [x] **Category Filter:** Above the cards there is a filter which sorts the cards into their different categories, like solar system, cosmology, and so on then displays only that category when the respective bubble is clicked on
-  - [x] The cards color matches the category filter bubble color in the filter bar 
-  - [x] 
-* [x] 
+  - [x] The cards color matches the category filter bubble color in the filter bar and inside the card itself
+  - [x] There is a count above the discovered count which displays the count of cards in that filtered category deck so for example cosmology filter category has 7 cards
+* [x] **Difficulty tag:** Add a difficulty tag on the cards, green easy tag, yellow medium tag, and red hard tag 
 
 ## Video Walkthrough
 
@@ -57,11 +57,29 @@ GIF created with ...
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+1. Vite Public Directory Root Pathing: Configuring local images initially caused routing mismatches when assuming relative structural path chains (Midnight-Zenith/public/...). This was solved by understanding that Vite automatically mounts and maps the root / URL string endpoint straight onto the public/ directory, requiring absolute paths starting cleanly from /images/.
+
+2. Aspect Ratio Clipping vs Container Layouts: Using standard container bounding frames with object-fit: cover frequently cut off or cropped crucial sections of the space images. Stripping the parent container wrappers entirely, allowing the inner image to render fluidly with proportionate auto-scaling width parameters, and setting a rigid height using object-fit: contain ensured the whole image remains visible inside the card boundaries with zero edge loss.
+
+3. Background Bleed at Rounded Corners: When using object-fit: contain, dark letterbox margins or container backgrounds (background: rgba(0, 0, 0, 0.4)) would peek through the rounded corners (border-radius: 12px). Setting the background explicitly to transparent and shifting the corner rounding logic directly onto the <img> element forced the main card background to bleed through smoothly, eliminating visual anomalies.
+
+4. Answer Leak/Flicker on Filter Change: A race condition occurred when a category filter button was clicked while a flashcard was currently flipped over to its back face. React instantly replaced the dataset element with the new category's index item before the CSS 3D matrix transition could finish turning forward, exposing the next card's answer for a brief moment. This was fixed by implementing an ephemeral isTransitioningFilter safety hook inside App.jsx, which dynamically forwards an explicit .suppress-flip layout wrapper to kill transition delays and lock back-face opacity to zero during state shifts.
+
+5. Browser Icon Caching: Updating the site favicon resulted in an aggressive local browser cache lock, leading to a missing generic globe fallback icon. Identifying file system case-sensitivity issues and manually performing a hard refresh on the direct asset path resolved the resource handshake mismatch.
+
+6. State Synchronization and Out-of-Bounds Handling on Filter Changes: When a user clicks a category filter, the active data array (`filteredCards`) changes instantly. If the user was previously viewing card index 15 in the "All" deck, switching to a category with only 7 cards would cause an immediate layout crash (`Cannot read properties of undefined`) because the `currentIndex` would point out of bounds. This required synchronizing filter selections to safely reset the array index pointer (`setCurrentIndex(0)`) inside the state update transaction before the component attempted to re-render the card details.
+
+7. Duplication of Context with Randomization Realignment: Implementing a pure random number generator (`Math.floor(Math.random() * poolSize)`) for the next button introduces a chance of selecting the same card index twice in a row. For a user, clicking a button to see a "next" card and seeing nothing change creates the illusion of a frozen or unresponsive UI. Overcoming this layout logic block required checking if a single-item pool exists, or building structural safety loops to guarantee that consecutive states update to a fresh index value.
+
+8. CSS 3D Transform and Overflow Clipping Conflicts: To make local images look clean, an initial design intuition used `overflow: hidden` on the main card container to clip child elements. However, in CSS 3D contexts (`preserve-3d`), setting any variant of `overflow: hidden` or an aggressive `backdrop-filter` on certain wrapper layers collapses the component's Z-axis perspective flattening the flip effect entirely. The layout had to be refactored by removing arbitrary overflow constraints from the parent structures and manually curving the individual component asset layers instead.
+
+9. Deterministic Progressive State Scaling for Sets: Tracking the unique historical progression of discovered cards across random cycles required a data structure that prevents tracking duplicates. Passing a standard JavaScript Array into `discoveredCardIds` would result in a bloated footprint as the user cycles through cards. Leveraging a native ES6 `Set` structure (`new Set([...prev, id])`) ensured that item entries remain fundamentally unique, allowing an accurate, lightweight count of unique exploration progress.
+
+10. Font Shifting and Layout Jitter Across Different Asset Proportions: Because different space imagery has entirely distinct original aspect ratios (some wide and landscape, others tight and squarish), the text elements below the images originally experienced "layout jitter"—bouncing up and down as new cards loaded. This was resolved by designing strict max-height constraints and leveraging absolute boundaries to isolate the structural flow of text from the shifting aspect footprints of the physical graphics asset files.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2026] [Hamza Munis]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
