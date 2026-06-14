@@ -47,19 +47,14 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='https://i.imgur.com/VHulubJ.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./src/assets/demo-walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+GIF created with kap (MacOS)  
 
 ### Production Screenshots
 
 **Filter: All Category: Solar System**
-<img src='./src/assets/demo-walkthrough.gif' title='Filter: All Category: Solar System' width='100%' alt='Filter: All Category: Solar System' />
+<img src='https://i.imgur.com/gF6diaY.jpeg' title='Filter: All Category: Solar System' width='100%' alt='Filter: All Category: Solar System' />
 
 **Filter: All Category: Solar System (flipped card example)**
 <img src='https://i.imgur.com/O5rD1rS.jpeg' title='Filter: All Category: Solar System (flipped card example)' width='100%' alt='Filter: All Category: Solar System (flipped card example)' />
