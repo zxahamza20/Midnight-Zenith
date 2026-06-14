@@ -36,11 +36,12 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] **Discovered Progress Tracker:** New cards or cards that appear the first time have a green New! tag oabove the image and a purple discovered tag when it appears a second time and onwards
-  - [x] There is a total discovered count below the total count which shows how many cards have been discovered
+  - [x] There is a total discovered count below the total count which shows how many cards have been discovered in each category (All, solar system etc)
 * [x] **Category Filter:** Above the cards there is a filter which sorts the cards into their different categories, like solar system, cosmology, and so on then displays only that category when the respective bubble is clicked on
+  - [x] 4 Categories; Solar system (yellow), Stars and Nebulae (teal), Cosmology (purple), Black Holes (red)
   - [x] The cards color matches the category filter bubble color in the filter bar and inside the card itself
   - [x] There is a count above the discovered count which displays the count of cards in that filtered category deck so for example cosmology filter category has 7 cards
-* [x] **Difficulty tag:** Add a difficulty tag on the cards, green easy tag, yellow medium tag, and red hard tag 
+* [x] **Difficulty tag:** Added a difficulty tag on the cards, green easy tag, yellow medium tag, and red hard tag 
 
 ## Video Walkthrough
 
