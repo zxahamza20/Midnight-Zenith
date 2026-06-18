@@ -105,4 +105,6 @@ function App() {
   );
 }
 
+// Part 2 started. remove this comment later
+
 export default App;
