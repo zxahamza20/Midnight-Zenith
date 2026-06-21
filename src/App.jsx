@@ -14,7 +14,11 @@ function App() {
   const [userGuess, setUserGuess] = useState('');
   const [guessFeedback, setGuessFeedback] = useState(null); 
 
-  // New states for shuffle management
+  // Streak states
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
+
+  // Shuffle management states
   const [isShuffled, setIsShuffled] = useState(false);
   const [sequenceMap, setSequenceMap] = useState([]);
 
@@ -100,13 +104,25 @@ function App() {
     e.preventDefault();
     if (!userGuess.trim() || !currentCard) return;
 
-    const standardizedAnswer = currentCard.answer.toLowerCase().trim();
-    const standardizedUserGuess = userGuess.toLowerCase().trim();
+    // Standardize answers: remove uppercase, trailing spaces, and minor punctuation strings
+    const cleanString = (str) => str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"]/g,"").trim();
 
+    const standardizedAnswer = cleanString(currentCard.answer);
+    const standardizedUserGuess = cleanString(userGuess);
+
+    // Matches if exact match OR if the targeted partial keyword matches safely
     if (standardizedUserGuess === standardizedAnswer || standardizedAnswer.includes(standardizedUserGuess)) {
       setGuessFeedback('correct');
+      setCurrentStreak(prev => {
+        const nextStreak = prev + 1;
+        if (nextStreak > longestStreak) {
+          setLongestStreak(nextStreak);
+        }
+        return nextStreak;
+      });
     } else {
       setGuessFeedback('incorrect');
+      setCurrentStreak(0);
     }
   };
 
@@ -117,6 +133,19 @@ function App() {
         <p className="description">
           Welcome to the highest point of cosmic trivia. Test your knowledge of the stellar void.
         </p>
+        
+        {/* Streak Tracker Display Component */}
+        <div className="streak-tracker">
+          <div className="streak-stat">
+            <span className="streak-label">Current Streak:</span>
+            <span className="streak-value current">{currentStreak} 🔥</span>
+          </div>
+          <div className="streak-stat">
+            <span className="streak-label">Longest Streak:</span>
+            <span className="streak-value longest">{longestStreak} 👑</span>
+          </div>
+        </div>
+
         <h3>total cards in deck: {spaceCards.length}</h3>
         <h3>
           {activeCategory.toLowerCase() === 'all' ? 'total' : activeCategory.toLowerCase()} deck: {filteredCards.length} cards
@@ -165,7 +194,7 @@ function App() {
                 onChange={(e) => setUserGuess(e.target.value)}
                 disabled={guessFeedback === 'correct'}
               />
-              <button type="submit" className="submit-guess-btn">
+              <button type="submit" className="submit-guess-btn" disabled={guessFeedback === 'correct'}>
                 Submit Guess
               </button>
             </form>

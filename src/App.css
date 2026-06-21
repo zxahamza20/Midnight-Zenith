@@ -353,6 +353,64 @@ body {
   box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
 }
 
+.streak-tracker {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 15px auto;
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  padding: 12px 24px;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.streak-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.streak-label {
+  font-size: 0.85rem;
+  color: #b0c7e6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.streak-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.streak-value.current {
+  color: #f59e0b; 
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.streak-value.longest {
+  color: #22d3ee;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+}
+
+@media (max-width: 500px) {
+  .streak-tracker {
+    gap: 15px;
+    padding: 10px 16px;
+    margin: 10px 16px;
+  }
+  .streak-value {
+    font-size: 1.15rem;
+  }
+  .streak-label {
+    font-size: 0.75rem;
+  }
+}
+
 @media (max-width: 500px) {
   .navigation-controls {
     padding: 0 16px;
