@@ -6,8 +6,10 @@
   cursor: pointer;
   box-sizing: border-box;
   background: transparent;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-in-out;
 }
+
+
 
 .card:hover {
   transform: translateY(-6px) scale(1.02);
@@ -250,6 +252,12 @@
   opacity: 0 !important;
   visibility: hidden !important;
   transition: none !important;
+}
+
+.card.suppress-flip,
+.card.suppress-flip * {
+  transition: none !important;
+  transform: none !important;
 }
 
 .card.feedback-correct .card-front,

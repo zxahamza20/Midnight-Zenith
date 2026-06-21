@@ -11,23 +11,26 @@ const Card = ({
   difficulty, 
   discoveredCardIds, 
   isTransitioningFilter,
+  isTransitioningCard,
   guessFeedback 
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     setIsFlipped(false);
-  }, [question, forceFlipReset]);
+  }, [id, forceFlipReset]);
 
   const handleCardClick = () => {
+    if (isTransitioningFilter || isTransitioningCard) return;
     setIsFlipped(!isFlipped);
   };
 
   const cardFeedbackClass = guessFeedback ? `feedback-${guessFeedback}` : '';
+  const showFlipped = isFlipped && !isTransitioningFilter && !isTransitioningCard;
 
   return (
     <div 
-      className={`card ${isFlipped && !isTransitioningFilter ? 'is-flipped' : ''} ${isTransitioningFilter ? 'suppress-flip' : ''} ${cardFeedbackClass}`} 
+      className={`card ${showFlipped ? 'is-flipped' : ''} ${(isTransitioningFilter || isTransitioningCard) ? 'suppress-flip' : ''} ${cardFeedbackClass}`} 
       data-category={category} 
       onClick={handleCardClick}
     >
