@@ -8,6 +8,7 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [forceFlipReset, setForceFlipReset] = useState(0);
   const [discoveredCardIds, setDiscoveredCardIds] = useState(new Set());
+  const [masteredCardIds, setMasteredCardIds] = useState(new Set());
   const [isTransitioningFilter, setIsTransitioningFilter] = useState(false);
   const [isTransitioningCard, setIsTransitioningCard] = useState(false);
 
@@ -22,28 +23,40 @@ function App() {
   const [isShuffled, setIsShuffled] = useState(false);
   const [sequenceMap, setSequenceMap] = useState([]);
 
-  const filteredCards = activeCategory === 'All' 
-    ? spaceCards 
-    : spaceCards.filter(card => card.category === activeCategory);
+  // 1. Filter out already mastered cards from the global card source pool
+  const standardPoolCards = spaceCards.filter(card => !masteredCardIds.has(card.id));
 
-  // Generate sequence mapping whenever the deck layout filters or shuffles
+  // 2. Filter remaining cards based on active category selection
+  const filteredCards = activeCategory === 'All' 
+    ? standardPoolCards 
+    : standardPoolCards.filter(card => card.category === activeCategory);
+
+  // Generate sequence mapping whenever the filtered card layout changes or toggles shuffle
   useEffect(() => {
     let indices = Array.from({ length: filteredCards.length }, (_, i) => i);
     if (isShuffled) {
-      // Fisher-Yates Shuffle implementation
       for (let i = indices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [indices[i], indices[j]] = [indices[j], indices[i]];
       }
     }
     setSequenceMap(indices);
-    setCurrentIndex(0); // Reset to the start of the new sequence order
+
+    // Safeguard pointer boundaries if cards are dynamically extracted by mastery action
+    setCurrentIndex(prevIndex => {
+      if (filteredCards.length === 0) return 0;
+      return prevIndex >= filteredCards.length ? filteredCards.length - 1 : prevIndex;
+    });
   }, [activeCategory, isShuffled, filteredCards.length]);
 
-  // Determine the actual card to show based on mapped sequence array
   const activeMappedIndex = sequenceMap[currentIndex] ?? 0;
   const currentCard = filteredCards[activeMappedIndex];
   const categoryList = ['All', ...new Set(spaceCards.map(card => card.category))];
+
+  // Helper method to count category-specific metrics explicitly
+  const getCategoryMasteredCount = (category) => {
+    return spaceCards.filter(card => masteredCardIds.has(card.id) && (category === 'All' || card.category === category)).length;
+  };
 
   const handleNextCard = () => {
     if (currentIndex >= filteredCards.length - 1) return;
@@ -104,13 +117,10 @@ function App() {
     e.preventDefault();
     if (!userGuess.trim() || !currentCard) return;
 
-    // Standardize answers: remove uppercase, trailing spaces, and minor punctuation strings
     const cleanString = (str) => str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"]/g,"").trim();
-
     const standardizedAnswer = cleanString(currentCard.answer);
     const standardizedUserGuess = cleanString(userGuess);
 
-    // Matches if exact match OR if the targeted partial keyword matches safely
     if (standardizedUserGuess === standardizedAnswer || standardizedAnswer.includes(standardizedUserGuess)) {
       setGuessFeedback('correct');
       setCurrentStreak(prev => {
@@ -126,6 +136,20 @@ function App() {
     }
   };
 
+  const handleMarkAsMastered = () => {
+    if (!currentCard) return;
+    setIsTransitioningCard(true);
+    setUserGuess('');
+    setGuessFeedback(null);
+    setForceFlipReset(prev => prev + 1);
+
+    setTimeout(() => {
+      setMasteredCardIds(prev => new Set([...prev, currentCard.id]));
+      setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
+      setIsTransitioningCard(false);
+    }, 300);
+  };
+
   return (
     <div className="app">
       <header className="app-header">
@@ -134,7 +158,6 @@ function App() {
           Welcome to the highest point of cosmic trivia. Test your knowledge of the stellar void.
         </p>
         
-        {/* Streak Tracker Display Component */}
         <div className="streak-tracker">
           <div className="streak-stat">
             <span className="streak-label">Current Streak:</span>
@@ -148,11 +171,16 @@ function App() {
 
         <h3>total cards in deck: {spaceCards.length}</h3>
         <h3>
-          {activeCategory.toLowerCase() === 'all' ? 'total' : activeCategory.toLowerCase()} deck: {filteredCards.length} cards
+          {activeCategory.toLowerCase() === 'all' ? 'total' : activeCategory.toLowerCase()} pool: {filteredCards.length} cards remaining
         </h3>
-        <p className="discovered-tracker">
-          cosmic exploration: {discoveredCardIds.size} cards discovered
-        </p>
+        <div className="exploration-trackers-row">
+          <p className="discovered-tracker">
+            cosmic exploration: {discoveredCardIds.size} cards discovered
+          </p>
+          <p className="mastered-tracker">
+            cosmic mastery ({activeCategory.toLowerCase()}): {getCategoryMasteredCount(activeCategory)} cards mastered
+          </p>
+        </div>
       </header>
 
       <div className="category-filters">
@@ -185,22 +213,35 @@ function App() {
               guessFeedback={guessFeedback}
             />
 
-            <form className="guess-container" onSubmit={handleGuessSubmit}>
-              <input
-                type="text"
-                className={`guess-input ${guessFeedback ? guessFeedback : ''}`}
-                placeholder="Type your answer here..."
-                value={userGuess}
-                onChange={(e) => setUserGuess(e.target.value)}
-                disabled={guessFeedback === 'correct'}
-              />
-              <button type="submit" className="submit-guess-btn" disabled={guessFeedback === 'correct'}>
-                Submit Guess
+            <div className="action-row-container">
+              <form className="guess-container" onSubmit={handleGuessSubmit}>
+                <input
+                  type="text"
+                  className={`guess-input ${guessFeedback ? guessFeedback : ''}`}
+                  placeholder="Type your answer here..."
+                  value={userGuess}
+                  onChange={(e) => setUserGuess(e.target.value)}
+                  disabled={guessFeedback === 'correct'}
+                />
+                <button type="submit" className="submit-guess-btn" disabled={guessFeedback === 'correct'}>
+                  Submit Guess
+                </button>
+              </form>
+
+              <button 
+                type="button" 
+                className="master-card-btn"
+                onClick={handleMarkAsMastered}
+                title="Mark this card as mastered and remove it from rotation"
+              >
+                🌌 Mark as Mastered
               </button>
-            </form>
+            </div>
           </>
         ) : (
-          <div style={{ color: '#94A3B8', padding: '40px' }}>No cards available.</div>
+          <div className="empty-pool-message">
+            🚀 All cosmic blueprints in this path have been mastered!
+          </div>
         )}
 
         <div className="navigation-controls">
@@ -224,7 +265,7 @@ function App() {
           <button 
             className="nav-button next-button" 
             onClick={handleNextCard}
-            disabled={currentIndex >= filteredCards.length - 1}
+            disabled={currentIndex >= filteredCards.length - 1 || filteredCards.length === 0}
             title="Next Card"
           >
             ⭢
