@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
 
-const Card = ({ id, question, answer, category, image, forceFlipReset, difficulty, discoveredCardIds, isTransitioningFilter }) => {
+const Card = ({ 
+  id, 
+  question, 
+  answer, 
+  category, 
+  image, 
+  forceFlipReset, 
+  difficulty, 
+  discoveredCardIds, 
+  isTransitioningFilter,
+  guessFeedback 
+}) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
@@ -12,9 +23,11 @@ const Card = ({ id, question, answer, category, image, forceFlipReset, difficult
     setIsFlipped(!isFlipped);
   };
 
+  const cardFeedbackClass = guessFeedback ? `feedback-${guessFeedback}` : '';
+
   return (
     <div 
-      className={`card ${isFlipped && !isTransitioningFilter ? 'is-flipped' : ''} ${isTransitioningFilter ? 'suppress-flip' : ''}`} 
+      className={`card ${isFlipped && !isTransitioningFilter ? 'is-flipped' : ''} ${isTransitioningFilter ? 'suppress-flip' : ''} ${cardFeedbackClass}`} 
       data-category={category} 
       onClick={handleCardClick}
     >

@@ -165,6 +165,72 @@ body {
   opacity: 0.9;
 }
 
+.guess-container {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 10px;
+}
+
+.guess-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 14px 20px;
+  color: #FFFFFF;
+  font-size: 1rem;
+  outline: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.guess-input:focus {
+  border-color: #A78BFA;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.3);
+}
+
+.guess-input.correct {
+  border-color: #22C55E !important;
+  background: rgba(34, 197, 94, 0.1);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+}
+
+.guess-input.incorrect {
+  border-color: #EF4444 !important;
+  background: rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+.submit-guess-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0 24px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-guess-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 500px) {
+  .guess-container {
+    flex-direction: column;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+  .submit-guess-btn {
+    padding: 12px;
+  }
+}
+
 @media (max-width: 500px) {
   .app {
     padding-top: 15px;
