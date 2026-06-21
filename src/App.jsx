@@ -14,24 +14,22 @@ function App() {
 
   const [userGuess, setUserGuess] = useState('');
   const [guessFeedback, setGuessFeedback] = useState(null); 
+  const [hasSubmittedGuess, setHasSubmittedGuess] = useState(false); 
 
-  // Streak states
+  const [hasFailedCurrentCard, setHasFailedCurrentCard] = useState(false);
+
   const [currentStreak, setCurrentStreak] = useState(0);
   const [longestStreak, setLongestStreak] = useState(0);
 
-  // Shuffle management states
   const [isShuffled, setIsShuffled] = useState(false);
   const [sequenceMap, setSequenceMap] = useState([]);
 
-  // 1. Filter out already mastered cards from the global card source pool
   const standardPoolCards = spaceCards.filter(card => !masteredCardIds.has(card.id));
 
-  // 2. Filter remaining cards based on active category selection
   const filteredCards = activeCategory === 'All' 
     ? standardPoolCards 
     : standardPoolCards.filter(card => card.category === activeCategory);
 
-  // Generate sequence mapping whenever the filtered card layout changes or toggles shuffle
   useEffect(() => {
     let indices = Array.from({ length: filteredCards.length }, (_, i) => i);
     if (isShuffled) {
@@ -42,7 +40,7 @@ function App() {
     }
     setSequenceMap(indices);
 
-    // Safeguard pointer boundaries if cards are dynamically extracted by mastery action
+
     setCurrentIndex(prevIndex => {
       if (filteredCards.length === 0) return 0;
       return prevIndex >= filteredCards.length ? filteredCards.length - 1 : prevIndex;
@@ -53,7 +51,7 @@ function App() {
   const currentCard = filteredCards[activeMappedIndex];
   const categoryList = ['All', ...new Set(spaceCards.map(card => card.category))];
 
-  // Helper method to count category-specific metrics explicitly
+
   const getCategoryMasteredCount = (category) => {
     return spaceCards.filter(card => masteredCardIds.has(card.id) && (category === 'All' || card.category === category)).length;
   };
@@ -64,6 +62,8 @@ function App() {
     setIsTransitioningCard(true);
     setUserGuess('');
     setGuessFeedback(null);
+    setHasSubmittedGuess(false); 
+    setHasFailedCurrentCard(false); 
     setForceFlipReset(prev => prev + 1);
 
     setTimeout(() => {
@@ -81,6 +81,8 @@ function App() {
     setIsTransitioningCard(true);
     setUserGuess('');
     setGuessFeedback(null);
+    setHasSubmittedGuess(false); 
+    setHasFailedCurrentCard(false);
     setForceFlipReset(prev => prev + 1);
 
     setTimeout(() => {
@@ -106,6 +108,8 @@ function App() {
     
     setUserGuess('');
     setGuessFeedback(null);
+    setHasSubmittedGuess(false); 
+    setHasFailedCurrentCard(false);
     
     setTimeout(() => {
       setActiveCategory(category);
@@ -117,22 +121,28 @@ function App() {
     e.preventDefault();
     if (!userGuess.trim() || !currentCard) return;
 
+    setHasSubmittedGuess(true);
+
     const cleanString = (str) => str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"]/g,"").trim();
     const standardizedAnswer = cleanString(currentCard.answer);
     const standardizedUserGuess = cleanString(userGuess);
 
     if (standardizedUserGuess === standardizedAnswer || standardizedAnswer.includes(standardizedUserGuess)) {
       setGuessFeedback('correct');
-      setCurrentStreak(prev => {
-        const nextStreak = prev + 1;
-        if (nextStreak > longestStreak) {
-          setLongestStreak(nextStreak);
-        }
-        return nextStreak;
-      });
+      
+      if (!hasFailedCurrentCard) {
+        setCurrentStreak(prev => {
+          const nextStreak = prev + 1;
+          if (nextStreak > longestStreak) {
+            setLongestStreak(nextStreak);
+          }
+          return nextStreak;
+        });
+      }
     } else {
       setGuessFeedback('incorrect');
       setCurrentStreak(0);
+      setHasFailedCurrentCard(true); 
     }
   };
 
@@ -141,6 +151,8 @@ function App() {
     setIsTransitioningCard(true);
     setUserGuess('');
     setGuessFeedback(null);
+    setHasSubmittedGuess(false); 
+    setHasFailedCurrentCard(false); 
     setForceFlipReset(prev => prev + 1);
 
     setTimeout(() => {
@@ -165,7 +177,7 @@ function App() {
           </div>
           <div className="streak-stat">
             <span className="streak-label">Longest Streak:</span>
-            <span className="streak-value longest">{longestStreak} 👑</span>
+            <span className="streak-value longest">{longestStreak} 🏆</span>
           </div>
         </div>
 
@@ -211,6 +223,7 @@ function App() {
               isTransitioningFilter={isTransitioningFilter}
               isTransitioningCard={isTransitioningCard}
               guessFeedback={guessFeedback}
+              hasSubmittedGuess={hasSubmittedGuess}
             />
 
             <div className="action-row-container">
@@ -234,7 +247,7 @@ function App() {
                 onClick={handleMarkAsMastered}
                 title="Mark this card as mastered and remove it from rotation"
               >
-                🌌 Mark as Mastered
+                📥 Mark as Mastered
               </button>
             </div>
           </>
@@ -251,7 +264,7 @@ function App() {
             disabled={currentIndex === 0}
             title="Previous Card"
           >
-            ⭠
+            ◀
           </button>
           
           <button 
@@ -268,7 +281,7 @@ function App() {
             disabled={currentIndex >= filteredCards.length - 1 || filteredCards.length === 0}
             title="Next Card"
           >
-            ⭢
+            ▶
           </button>
         </div>
       </main>

@@ -243,11 +243,11 @@ body {
 
 .guess-input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.17);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 14px;
   padding: 14px 20px;
-  color: #FFFFFF;
+  color: #d6b9f4;
   font-size: 1rem;
   outline: none;
   backdrop-filter: blur(8px);

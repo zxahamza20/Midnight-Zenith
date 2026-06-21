@@ -12,7 +12,8 @@ const Card = ({
   discoveredCardIds, 
   isTransitioningFilter,
   isTransitioningCard,
-  guessFeedback 
+  guessFeedback,
+  hasSubmittedGuess // NEW DESTRUCTURED PROP
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -22,6 +23,10 @@ const Card = ({
 
   const handleCardClick = () => {
     if (isTransitioningFilter || isTransitioningCard) return;
+    
+    // ENFORCED RULE: If they haven't submitted a guess, ignore the click!
+    if (!hasSubmittedGuess) return; 
+
     setIsFlipped(!isFlipped);
   };
 
@@ -30,9 +35,12 @@ const Card = ({
 
   return (
     <div 
-      className={`card ${showFlipped ? 'is-flipped' : ''} ${(isTransitioningFilter || isTransitioningCard) ? 'suppress-flip' : ''} ${cardFeedbackClass}`} 
+      className={`card ${showFlipped ? 'is-flipped' : ''} ${
+        isTransitioningFilter || isTransitioningCard ? 'suppress-flip' : ''
+      } ${cardFeedbackClass} ${!hasSubmittedGuess ? 'locked-flip' : ''}`} // Added locked-flip CSS hook if needed
       data-category={category} 
       onClick={handleCardClick}
+      title={!hasSubmittedGuess ? "Please submit a guess before revealing the answer!" : "Click to flip"}
     >
       <div className="card-inner">
         <div className="card-front">
