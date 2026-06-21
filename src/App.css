@@ -102,7 +102,7 @@ body {
 .prev-button:hover:not(:disabled),
 .nav-button:hover:not(:disabled),
 .shuffle-button:hover,
-.master-card-btn:hover {
+.master-card-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   color: #f3e8ff;
   background: linear-gradient(135deg, rgb(181, 135, 223) 0%, rgb(139, 32, 246) 100%);
@@ -119,7 +119,7 @@ body {
 .prev-button:active:not(:disabled),
 .nav-button:active:not(:disabled),
 .shuffle-button:active,
-.master-card-btn:active {
+.master-card-btn:active:not(:disabled) {
   transform: translateY(2px) scale(0.98);
   background: linear-gradient(135deg, rgb(181, 135, 223) 0%, rgb(139, 32, 246) 100%);
   backdrop-filter: none;
@@ -370,6 +370,15 @@ body {
   box-sizing: border-box;
   width: 100%;
   text-shadow: 0 0 8px rgba(34, 211, 238, 0.3);
+}
+
+.master-card-btn:disabled,
+.master-card-btn.master-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 @media (max-width: 500px) {

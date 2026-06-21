@@ -243,9 +243,10 @@ function App() {
 
               <button 
                 type="button" 
-                className="master-card-btn"
+                className={`master-card-btn ${guessFeedback !== 'correct' ? 'master-disabled' : ''}`}
                 onClick={handleMarkAsMastered}
-                title="Mark this card as mastered and remove it from rotation"
+                disabled={guessFeedback !== 'correct'}
+                title={guessFeedback === 'correct' ? "Mark this card as mastered and remove it from rotation" : "You must guess correctly before mastering this card"}
               >
                 📥 Mark as Mastered
               </button>
