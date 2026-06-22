@@ -159,6 +159,23 @@ body {
   background: #0891b2; 
 }
 
+.shuffle-button.shuffled-active:hover {
+  transform: translateY(-2px);
+  color: #f3e8ff;
+  background: linear-gradient(135deg, rgb(181, 135, 223) 0%, rgb(139, 32, 246) 100%);
+  box-shadow:
+    0 0 0 4px rgba(167, 139, 250, 0.22),
+    0 14px 40px rgba(124, 58, 237, 0.34),
+    0 0 28px rgba(192, 132, 252, 0.6);
+  border-color: rgba(223, 200, 255, 0.95);
+  filter: saturate(1.1);
+}
+
+.shuffle-button.shuffled-active:active:active {
+  background: linear-gradient(135deg, rgb(181, 135, 223) 0%, rgb(139, 32, 246) 100%);
+  transform: translateY(2px) scale(0.98);
+}
+
 .category-filters {
   display: flex;
   justify-content: center;
