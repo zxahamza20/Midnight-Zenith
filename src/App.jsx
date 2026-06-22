@@ -24,7 +24,7 @@ function App() {
   const [isShuffled, setIsShuffled] = useState(false);
   const [sequenceMap, setSequenceMap] = useState([]);
 
-  const [isMastering, setIsMastering] = useState(false);
+  const [pendingMasterId, setPendingMasterId] = useState(null);
 
   const standardPoolCards = spaceCards.filter(card => !masteredCardIds.has(card.id));
 
@@ -61,8 +61,11 @@ function App() {
     return spaceCards.filter(card => masteredCardIds.has(card.id) && card.category === category).length;
   };
 
+  const isCurrentPendingMaster = !!(pendingMasterId && currentCard && pendingMasterId === currentCard.id);
+
   const handleNextCard = () => {
-    if (currentIndex >= filteredCards.length - 1) return;
+    const willMaster = isCurrentPendingMaster;
+    if (!willMaster && currentIndex >= filteredCards.length - 1) return;
 
     setIsTransitioningCard(true);
     setUserGuess('');
@@ -75,7 +78,12 @@ function App() {
       if (currentCard) {
         setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
       }
-      setCurrentIndex(prev => prev + 1);
+      if (willMaster) {
+        setMasteredCardIds(prev => new Set([...prev, pendingMasterId]));
+        setPendingMasterId(null);
+      } else {
+        setCurrentIndex(prev => prev + 1);
+      }
       setIsTransitioningCard(false);
     }, 300);
   };
@@ -109,6 +117,11 @@ function App() {
 
     if (currentCard) {
       setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
+    }
+
+    if (isCurrentPendingMaster) {
+      setMasteredCardIds(prev => new Set([...prev, pendingMasterId]));
+      setPendingMasterId(null);
     }
 
     setUserGuess('');
@@ -153,20 +166,7 @@ function App() {
 
   const handleMarkAsMastered = () => {
     if (!currentCard) return;
-    setIsTransitioningCard(true);
-    setIsMastering(true);
-    setUserGuess('');
-    setGuessFeedback(null);
-    setHasSubmittedGuess(false);
-    setHasFailedCurrentCard(false);
-    setForceFlipReset(prev => prev + 1);
-
-    setTimeout(() => {
-      setMasteredCardIds(prev => new Set([...prev, currentCard.id]));
-      setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
-      setIsTransitioningCard(false);
-      setIsMastering(false);
-    }, 300);
+    setPendingMasterId(currentCard.id);
   };
 
   return (
@@ -227,11 +227,12 @@ function App() {
               forceFlipReset={forceFlipReset}
               difficulty={currentCard.difficulty}
               discoveredCardIds={discoveredCardIds}
+              masteredCardIds={masteredCardIds}
               isTransitioningFilter={isTransitioningFilter}
               isTransitioningCard={isTransitioningCard}
               guessFeedback={guessFeedback}
               hasSubmittedGuess={hasSubmittedGuess}
-              isMastering={isMastering}
+              isMastering={isCurrentPendingMaster}
             />
 
             <div className="action-row-container">
@@ -256,12 +257,12 @@ function App() {
               ) : (
                 <button
                   type="button"
-                  className={`master-card-btn ${isMastering ? 'mastered-active' : (guessFeedback !== 'correct' ? 'master-disabled' : '')}`}
+                  className={`master-card-btn ${isCurrentPendingMaster ? 'mastered-active' : (guessFeedback !== 'correct' ? 'master-disabled' : '')}`}
                   onClick={handleMarkAsMastered}
-                  disabled={guessFeedback !== 'correct' || isMastering}
-                  title={guessFeedback === 'correct' ? "Mark this card as mastered and remove it from rotation" : "You must guess correctly before mastering this card"}
+                  disabled={guessFeedback !== 'correct' || isCurrentPendingMaster}
+                  title={isCurrentPendingMaster ? "Card marked as mastered — click Next to remove it" : guessFeedback === 'correct' ? "Mark this card as mastered and remove it from rotation" : "You must guess correctly before mastering this card"}
                 >
-                  {isMastering ? '⭐ Mastered!' : '📥 Mark as Mastered'}
+                  {isCurrentPendingMaster ? '⭐ Mastered! (click Next ▶)' : '📥 Mark as Mastered'}
                 </button>
               )}
             </div>
@@ -269,7 +270,7 @@ function App() {
         ) : (
           <div className="empty-pool-message">
             {activeCategory === 'Mastered'
-              ? '⭐ No cards mastered yet in this category!'
+              ? '⭐ No cards mastered yet!'
               : '🚀 All cosmic blueprints in this path have been mastered!'}
           </div>
         )}
@@ -295,7 +296,7 @@ function App() {
           <button
             className="nav-button next-button"
             onClick={handleNextCard}
-            disabled={currentIndex >= filteredCards.length - 1 || filteredCards.length === 0}
+            disabled={(!isCurrentPendingMaster && currentIndex >= filteredCards.length - 1) || filteredCards.length === 0}
             title="Next Card"
           >
             ▶

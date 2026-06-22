@@ -10,6 +10,7 @@ const Card = ({
   forceFlipReset,
   difficulty,
   discoveredCardIds,
+  masteredCardIds,
   isTransitioningFilter,
   isTransitioningCard,
   guessFeedback,
@@ -24,13 +25,17 @@ const Card = ({
 
   const handleCardClick = () => {
     if (isTransitioningFilter || isTransitioningCard) return;
-
     if (!hasSubmittedGuess) return;
-
     setIsFlipped(!isFlipped);
   };
 
-  const cardFeedbackClass = isMastering ? 'feedback-mastered' : (guessFeedback ? `feedback-${guessFeedback}` : '');
+  const isThisMastered = !!(masteredCardIds && masteredCardIds.has(id));
+  const isDiscovered = !!(discoveredCardIds && discoveredCardIds.has(id));
+
+  const cardFeedbackClass = (isMastering || isThisMastered)
+    ? 'feedback-mastered'
+    : guessFeedback ? `feedback-${guessFeedback}` : '';
+
   const showFlipped = isFlipped && !isTransitioningFilter && !isTransitioningCard;
 
   return (
@@ -48,7 +53,14 @@ const Card = ({
             <div className="card-header-badges">
               {isMastering ? (
                 <span className="mastered-badge">⭐ Mastered!</span>
-              ) : discoveredCardIds && discoveredCardIds.has(id) ? (
+              ) : isThisMastered ? (
+                <>
+                  {isDiscovered && (
+                    <span className="discovered-badge">discovered</span>
+                  )}
+                  <span className="mastered-badge">⭐ Mastered!</span>
+                </>
+              ) : isDiscovered ? (
                 <span className="discovered-badge">discovered</span>
               ) : (
                 <span className="new-badge">New!</span>
