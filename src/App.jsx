@@ -262,7 +262,7 @@ function App() {
                   disabled={guessFeedback !== 'correct' || isCurrentPendingMaster}
                   title={isCurrentPendingMaster ? "Card marked as mastered — click Next to remove it" : guessFeedback === 'correct' ? "Mark this card as mastered and remove it from rotation" : "You must guess correctly before mastering this card"}
                 >
-                  {isCurrentPendingMaster ? '⭐ Mastered! (click Next ▶)' : '📥 Mark as Mastered'}
+                  {isCurrentPendingMaster ? '⭐ Mastered!' : '📥 Mark as Mastered'}
                 </button>
               )}
             </div>
