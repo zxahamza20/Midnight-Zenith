@@ -129,3 +129,87 @@ GIF created with kap (MacOS)
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+# Web Development Project 3 - *Midnight Zenith - Part 2*
+
+Submitted by: **Hamza Munis**
+
+This web app: **Midnight Zenith is an interactive, space-themed flashcard app designed to test users on their knowledge of space trivia. It categorizes cards (Solar System, Stars & Nebulae, Cosmology, and Black Holes) with responsive bento-grid inspired cards that flip over to reveal answers, track historical card exploration, and randomize selections smoothly. It also allows the user to submit theirr guess before flipping the card to see the answer, and user can now mark the cards as mastered to add to a seperarte list. tradionall next and prev buttons work sequentially but shuffle implements the random generation logic. There are multiple counters like cards left in pool, streaks, and mastered cards along with prev counters.**
+
+Time spent: **12** hours spent in total (18 in part 1, 12 in part 2, 30 in total)
+
+## Required Features
+
+The following **required** functionality is completed:
+
+- [x] **The user can enter their guess into an input box *before* seeing the flipside of the card**
+  - Application features a clearly labeled input box with a submit button where users can type in a guess
+  - Clicking on the submit button with an **incorrect** answer shows visual feedback that it is wrong 
+  -  Clicking on the submit button with a **correct** answer shows visual feedback that it is correct
+- [x] **The user can navigate through an ordered list of cardss**
+  - A forward/next button displayed on the card navigates to the next card in a set sequence when clicked
+  - A previous/back button displayed on the card returns to the previous card in the set sequence when clicked
+  - Both the next and back buttons should have some visual indication that the user is at the beginning or end of the list (for example, graying out and no longer being available to click), not allowing for wrap-around navigation
+
+The following **optional** features are implemented:
+
+
+- [x] Users can use a shuffle button to randomize the order of the cards
+  - Cards should remain in the same sequence (**NOT** randomized) unless the shuffle button is clicked 
+  - Cards should change to a random sequence once the shuffle button is clicked
+- [x] A user’s answer may be counted as correct even when it is slightly different from the target answer
+  - Answers are considered correct even if they only partially match the answer on the card 
+  - Examples: ignoring uppercase/lowercase discrepancies, ignoring punctuation discrepancies, matching only for a particular part of the answer rather than the whole answer
+- [x] A counter displays the user’s current and longest streak of correct responses
+  - The current counter increments when a user guesses an answer correctly
+  - The current counter resets to 0 when a user guesses an answer incorrectly
+  - A separate counter tracks the longest streak, updating if the value of the current streak counter exceeds the value of the longest streak counter 
+- [x] A user can mark a card that they have mastered and have it removed from the pool of displayed cards
+  - The user can mark a card to indicate that it has been mastered
+  - Mastered cards are removed from the pool of displayed cards and added to a list of mastered cards
+
+
+The following **additional** features are implemented:
+
+* [x] N/A
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with kap (MacOS)
+
+### Production Screenshots
+
+<img src='https://i.imgur.com/od9m6hR.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/8ZIEPQQ.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/zfKJi6W.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/oseKKeM.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/E9mQxvI.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/hamoeMT.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/UdrpglR.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/FZgZRfK.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/eG6ceCP.jpeg' title='' width='100%' alt='image' />
+<img src='https://i.imgur.com/odxTGSr.jpeg' title='' width='100%' alt='image' />
+
+## Notes
+
+Describe any challenges encountered while building the app.
+
+## License
+
+    Copyright [2026] [Hamza Munis]
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
