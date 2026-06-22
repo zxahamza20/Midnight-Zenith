@@ -196,7 +196,29 @@ GIF created with kap (MacOS)
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+1. **State Syncing & Race Conditions (Transitions vs. Data)**
+Answer Leak/Flicker on Filter Changes: A prominent race condition occurred when a user clicked a category filter button while a flashcard was still flipped over to its back face. React would immediately update the active item index to the new dataset before the CSS 3D matrix transition could finish turning forward, exposing the next card's answer briefly. This required introducing an isTransitioningFilter safety hook inside App.jsx to dynamically forward a .suppress-flip class, dropping transition delays and locking back-face visibility to zero during state shifts.
+
+Instant Text Flashing on Next Card: When moving to the next card via sequential navigation, updating the indices instantly caused the next card's text to flash on screen before the card could visually reset. To preserve smooth card rotation, a setTimeout of 300ms was re-engineered to allow the old card to visually hide or flip forward before updating currentCard.answer and currentCard.question.
+
+2. **Logic Guardrails and Strict Game Sequencing**
+Restricting Flips Until Guessed: Implementing a strict rule ensuring that a user cannot flip a card to see the answer until they have submitted a guess at least once. This required adding a hasSubmittedGuess tracking variable across navigation endpoints and passing it down to block click execution on the Card component.
+
+Conditional Mastery Restrictions: The game required that users cannot mark a card as mastered unless they have successfully guessed it correct at least once. The system had to conditionally disable the button and alter its state based on evaluating the current card's guessFeedback.
+
+Streak Lock Controls: Managing the streak counter to ensure that correcting a previously wrong guess would not increment the active streak, meaning streaks reset to 0 upon failure and stay locked until a completely fresh card is loaded.
+
+3. **Pointer-Events and Interactive UI Bugs**
+Broken "Not-Allowed" Cursor on Disabled Buttons: When buttons like "Mark as Mastered" were disabled, the custom not-allowed cursor indicator failed to show up on mouse hover. This occurred because pointer-events: none; was applied to the disabled state, telling the browser to completely ignore mouse communication. The workaround involved switching the configuration to pointer-events: auto !important; to ensure native click restrictions remained secure while restoring hover tracking and cursor visualization safely.
+
+4. **String Extraction and Fuzzy Matching**
+Lenient Text Submissions: Raw text comparisons would cause clean answers to register as incorrect due to casing or punctuation differences. A continuous answer checker had to be built using fuzzy logic tweaks that actively ignored minor punctuation nodes (hyphens, periods, apostrophes) and capitalization mismatches to provide forgiving user feedback.
+
+5. **Unable to implement additional features**
+I tried very hard to implement two new features, one was a timed mode where user would have 12 seconds to guess the answer or else the card would lock on incorrect and user would have to move on. The second feature was ranks, such as discovering one card from each filter category, making 25 mistakes, mastering 5, 10, 15 etc cards and mastering all the categories or atleast one category completely. I was unable to implement these in the end because of time contraints and other emergencies and my code kept breaking between styling and adding new layout so I had to give up for now. 
+
+6. **Issues with styling and logic for some features**
+I also had some issues with syncing the styles for all the buttons because fixing one would break the other and sryles overlapped to create a new very ugly style. 
 
 ## License
 
