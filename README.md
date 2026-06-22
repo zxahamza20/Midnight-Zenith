@@ -177,7 +177,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/q7JFMB3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/q5FhibL.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with kap (MacOS)
 
