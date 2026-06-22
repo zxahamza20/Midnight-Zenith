@@ -225,6 +225,13 @@ body {
   box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
 }
 
+.filter-btn.active[data-cat="Mastered"] {
+  background: rgba(250, 204, 21, 0.15);
+  color: #FACC15;
+  border-color: rgba(250, 204, 21, 0.5);
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
+}
+
 .discovered-tracker {
   font-size: 1.3rem;
   font-weight: 600;
@@ -379,6 +386,31 @@ body {
   box-shadow: none !important;
   text-shadow: none !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.master-card-btn.already-mastered {
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.3) 0%, rgba(253, 224, 71, 0.3) 100%);
+  color: #FACC15;
+  border-color: rgba(250, 204, 21, 0.55);
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.25);
+  cursor: not-allowed;
+  opacity: 1;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.master-card-btn.already-mastered:hover,
+.master-card-btn.already-mastered:active,
+.master-card-btn.already-mastered:focus {
+  transform: none !important;
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.3) 0%, rgba(253, 224, 71, 0.3) 100%) !important;
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.25) !important;
+  border-color: rgba(250, 204, 21, 0.55) !important;
+  color: #FACC15 !important;
+  cursor: not-allowed !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
 }
 
 @media (max-width: 500px) {

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
 
-const Card = ({ 
-  id, 
-  question, 
-  answer, 
-  category, 
-  image, 
-  forceFlipReset, 
-  difficulty, 
-  discoveredCardIds, 
+const Card = ({
+  id,
+  question,
+  answer,
+  category,
+  image,
+  forceFlipReset,
+  difficulty,
+  discoveredCardIds,
   isTransitioningFilter,
   isTransitioningCard,
   guessFeedback,
-  hasSubmittedGuess // NEW DESTRUCTURED PROP
+  hasSubmittedGuess,
+  isMastering
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -23,22 +24,21 @@ const Card = ({
 
   const handleCardClick = () => {
     if (isTransitioningFilter || isTransitioningCard) return;
-    
-    // ENFORCED RULE: If they haven't submitted a guess, ignore the click!
-    if (!hasSubmittedGuess) return; 
+
+    if (!hasSubmittedGuess) return;
 
     setIsFlipped(!isFlipped);
   };
 
-  const cardFeedbackClass = guessFeedback ? `feedback-${guessFeedback}` : '';
+  const cardFeedbackClass = isMastering ? 'feedback-mastered' : (guessFeedback ? `feedback-${guessFeedback}` : '');
   const showFlipped = isFlipped && !isTransitioningFilter && !isTransitioningCard;
 
   return (
-    <div 
+    <div
       className={`card ${showFlipped ? 'is-flipped' : ''} ${
         isTransitioningFilter || isTransitioningCard ? 'suppress-flip' : ''
-      } ${cardFeedbackClass} ${!hasSubmittedGuess ? 'locked-flip' : ''}`} // Added locked-flip CSS hook if needed
-      data-category={category} 
+      } ${cardFeedbackClass} ${!hasSubmittedGuess ? 'locked-flip' : ''}`}
+      data-category={category}
       onClick={handleCardClick}
       title={!hasSubmittedGuess ? "Please submit a guess before revealing the answer!" : "Click to flip"}
     >
@@ -46,7 +46,9 @@ const Card = ({
         <div className="card-front">
           <div className="card-content">
             <div className="card-header-badges">
-              {discoveredCardIds && discoveredCardIds.has(id) ? (
+              {isMastering ? (
+                <span className="mastered-badge">⭐ Mastered!</span>
+              ) : discoveredCardIds && discoveredCardIds.has(id) ? (
                 <span className="discovered-badge">discovered</span>
               ) : (
                 <span className="new-badge">New!</span>

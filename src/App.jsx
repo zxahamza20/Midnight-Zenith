@@ -13,8 +13,8 @@ function App() {
   const [isTransitioningCard, setIsTransitioningCard] = useState(false);
 
   const [userGuess, setUserGuess] = useState('');
-  const [guessFeedback, setGuessFeedback] = useState(null); 
-  const [hasSubmittedGuess, setHasSubmittedGuess] = useState(false); 
+  const [guessFeedback, setGuessFeedback] = useState(null);
+  const [hasSubmittedGuess, setHasSubmittedGuess] = useState(false);
 
   const [hasFailedCurrentCard, setHasFailedCurrentCard] = useState(false);
 
@@ -24,10 +24,14 @@ function App() {
   const [isShuffled, setIsShuffled] = useState(false);
   const [sequenceMap, setSequenceMap] = useState([]);
 
+  const [isMastering, setIsMastering] = useState(false);
+
   const standardPoolCards = spaceCards.filter(card => !masteredCardIds.has(card.id));
 
-  const filteredCards = activeCategory === 'All' 
-    ? standardPoolCards 
+  const filteredCards = activeCategory === 'All'
+    ? standardPoolCards
+    : activeCategory === 'Mastered'
+    ? spaceCards.filter(card => masteredCardIds.has(card.id))
     : standardPoolCards.filter(card => card.category === activeCategory);
 
   useEffect(() => {
@@ -40,7 +44,6 @@ function App() {
     }
     setSequenceMap(indices);
 
-
     setCurrentIndex(prevIndex => {
       if (filteredCards.length === 0) return 0;
       return prevIndex >= filteredCards.length ? filteredCards.length - 1 : prevIndex;
@@ -49,21 +52,23 @@ function App() {
 
   const activeMappedIndex = sequenceMap[currentIndex] ?? 0;
   const currentCard = filteredCards[activeMappedIndex];
-  const categoryList = ['All', ...new Set(spaceCards.map(card => card.category))];
-
+  const categoryList = ['All', ...new Set(spaceCards.map(card => card.category)), 'Mastered'];
 
   const getCategoryMasteredCount = (category) => {
-    return spaceCards.filter(card => masteredCardIds.has(card.id) && (category === 'All' || card.category === category)).length;
+    if (category === 'All' || category === 'Mastered') {
+      return masteredCardIds.size;
+    }
+    return spaceCards.filter(card => masteredCardIds.has(card.id) && card.category === category).length;
   };
 
   const handleNextCard = () => {
     if (currentIndex >= filteredCards.length - 1) return;
-    
+
     setIsTransitioningCard(true);
     setUserGuess('');
     setGuessFeedback(null);
-    setHasSubmittedGuess(false); 
-    setHasFailedCurrentCard(false); 
+    setHasSubmittedGuess(false);
+    setHasFailedCurrentCard(false);
     setForceFlipReset(prev => prev + 1);
 
     setTimeout(() => {
@@ -81,7 +86,7 @@ function App() {
     setIsTransitioningCard(true);
     setUserGuess('');
     setGuessFeedback(null);
-    setHasSubmittedGuess(false); 
+    setHasSubmittedGuess(false);
     setHasFailedCurrentCard(false);
     setForceFlipReset(prev => prev + 1);
 
@@ -101,16 +106,16 @@ function App() {
   const handleCategoryChange = (category) => {
     setIsTransitioningFilter(true);
     setForceFlipReset(prev => prev + 1);
-    
+
     if (currentCard) {
       setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
     }
-    
+
     setUserGuess('');
     setGuessFeedback(null);
-    setHasSubmittedGuess(false); 
+    setHasSubmittedGuess(false);
     setHasFailedCurrentCard(false);
-    
+
     setTimeout(() => {
       setActiveCategory(category);
       setIsTransitioningFilter(false);
@@ -129,7 +134,7 @@ function App() {
 
     if (standardizedUserGuess === standardizedAnswer || standardizedAnswer.includes(standardizedUserGuess)) {
       setGuessFeedback('correct');
-      
+
       if (!hasFailedCurrentCard) {
         setCurrentStreak(prev => {
           const nextStreak = prev + 1;
@@ -142,23 +147,25 @@ function App() {
     } else {
       setGuessFeedback('incorrect');
       setCurrentStreak(0);
-      setHasFailedCurrentCard(true); 
+      setHasFailedCurrentCard(true);
     }
   };
 
   const handleMarkAsMastered = () => {
     if (!currentCard) return;
     setIsTransitioningCard(true);
+    setIsMastering(true);
     setUserGuess('');
     setGuessFeedback(null);
-    setHasSubmittedGuess(false); 
-    setHasFailedCurrentCard(false); 
+    setHasSubmittedGuess(false);
+    setHasFailedCurrentCard(false);
     setForceFlipReset(prev => prev + 1);
 
     setTimeout(() => {
       setMasteredCardIds(prev => new Set([...prev, currentCard.id]));
       setDiscoveredCardIds(prev => new Set([...prev, currentCard.id]));
       setIsTransitioningCard(false);
+      setIsMastering(false);
     }, 300);
   };
 
@@ -169,7 +176,7 @@ function App() {
         <p className="description">
           Welcome to the highest point of cosmic trivia. Test your knowledge of the stellar void.
         </p>
-        
+
         <div className="streak-tracker">
           <div className="streak-stat">
             <span className="streak-label">Current Streak:</span>
@@ -217,13 +224,14 @@ function App() {
               answer={currentCard.answer}
               category={currentCard.category}
               image={currentCard.image}
-              forceFlipReset={forceFlipReset} 
+              forceFlipReset={forceFlipReset}
               difficulty={currentCard.difficulty}
               discoveredCardIds={discoveredCardIds}
               isTransitioningFilter={isTransitioningFilter}
               isTransitioningCard={isTransitioningCard}
               guessFeedback={guessFeedback}
               hasSubmittedGuess={hasSubmittedGuess}
+              isMastering={isMastering}
             />
 
             <div className="action-row-container">
@@ -241,34 +249,42 @@ function App() {
                 </button>
               </form>
 
-              <button 
-                type="button" 
-                className={`master-card-btn ${guessFeedback !== 'correct' ? 'master-disabled' : ''}`}
-                onClick={handleMarkAsMastered}
-                disabled={guessFeedback !== 'correct'}
-                title={guessFeedback === 'correct' ? "Mark this card as mastered and remove it from rotation" : "You must guess correctly before mastering this card"}
-              >
-                📥 Mark as Mastered
-              </button>
+              {activeCategory === 'Mastered' ? (
+                <div className="master-card-btn already-mastered">
+                  ⭐ Already Mastered
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className={`master-card-btn ${isMastering ? 'mastered-active' : (guessFeedback !== 'correct' ? 'master-disabled' : '')}`}
+                  onClick={handleMarkAsMastered}
+                  disabled={guessFeedback !== 'correct' || isMastering}
+                  title={guessFeedback === 'correct' ? "Mark this card as mastered and remove it from rotation" : "You must guess correctly before mastering this card"}
+                >
+                  {isMastering ? '⭐ Mastered!' : '📥 Mark as Mastered'}
+                </button>
+              )}
             </div>
           </>
         ) : (
           <div className="empty-pool-message">
-            🚀 All cosmic blueprints in this path have been mastered!
+            {activeCategory === 'Mastered'
+              ? '⭐ No cards mastered yet in this category!'
+              : '🚀 All cosmic blueprints in this path have been mastered!'}
           </div>
         )}
 
         <div className="navigation-controls">
-          <button 
-            className="nav-button prev-button" 
+          <button
+            className="nav-button prev-button"
             onClick={handlePrevCard}
             disabled={currentIndex === 0}
             title="Previous Card"
           >
             ◀
           </button>
-          
-          <button 
+
+          <button
             className={`shuffle-button ${isShuffled ? 'shuffled-active' : ''}`}
             onClick={handleToggleShuffle}
             title={isShuffled ? "Disable Shuffle" : "Shuffle Deck"}
@@ -276,8 +292,8 @@ function App() {
             🔀 {isShuffled ? "Shuffle" : "Shuffle"}
           </button>
 
-          <button 
-            className="nav-button next-button" 
+          <button
+            className="nav-button next-button"
             onClick={handleNextCard}
             disabled={currentIndex >= filteredCards.length - 1 || filteredCards.length === 0}
             title="Next Card"
